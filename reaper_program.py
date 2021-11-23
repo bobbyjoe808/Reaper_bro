@@ -9,14 +9,9 @@ width = 120
 pos = -(width / 4)
 _speed = 7
 
-
 root = tk.Tk()
 screen_height = root.winfo_screenheight()
 root.geometry('%dx%d+%d+%d' % (width, height, pos, screen_height - height - 25))
-#root.title('Reaper')
-
-#path = (os.path.dirname( os.path.realpath(__file__)) +'\iteam_tags.txt')
-
 
 # create list with each frame of animation #
 reaper_l_1 = []
@@ -42,21 +37,8 @@ for num in range(0, 5):
     reaper0 = tk.PhotoImage(file=os.path.dirname( os.path.realpath(__file__)) +"\PassiveIdleReaper2f.gif", format=f"gif -index {num}")
     reaper = reaper0.subsample(4, 4)
     reaper_l_2f.append(reaper)
-
-reaper_l_3 = []
-for num in range(0, 8):
-    reaper0 = tk.PhotoImage(file=os.path.dirname( os.path.realpath(__file__)) +"\HostileRunningReaper2.gif", format=f"gif -index {num}")
-    reaper = reaper0.subsample(4, 4)
-    reaper_l_3.append(reaper)
-
-reaper_l_3f = []
-for num in range(0, 8):
-    reaper0 = tk.PhotoImage(file=os.path.dirname( os.path.realpath(__file__)) +"\HostileRunningReaper2f.gif", format=f"gif -index {num}")
-    reaper = reaper0.subsample(4, 4)
-    reaper_l_3f.append(reaper)
-###
-
-
+    
+####
 class start():
 
     def __init__(self, current_image):
@@ -65,8 +47,6 @@ class start():
         self.speed =  -_speed
         self.activity = 'walk'
         self.x = root.winfo_screenwidth()
-
-
 
     def animation(self, count, pos, flip=True):
 
@@ -78,8 +58,7 @@ class start():
         
         if random.randint(0,20) == 20 and self.activity == 'stop':
             self.activity = random.choice(activities)
-
-
+            
         if self.activity == 'walk':
     
             if self.x == 0:
@@ -90,8 +69,7 @@ class start():
                 self.x = root.winfo_screenwidth()
             if self.x == root.winfo_screenwidth():
                 if pos  == root.winfo_screenwidth()-3:
-                    self.x = 0
-            
+                    self.x = 0     
 
         if self.activity == 'stop':
             self.x = pos
@@ -108,17 +86,12 @@ class start():
             self.speed = _speed
 
             flip = True
-            if self.current_image == reaper_l_3f:
-                print('4')
-                self.current_image = reaper_l_3
             if self.current_image == reaper_l_1f or self.current_image == reaper_l_2f:
                 self.current_image = reaper_l_1
 
         if pos - _speed > self.x:
             self.speed = -_speed
             flip = False
-            if self.current_image == reaper_l_3:
-                self.current_image = reaper_l_3f
             if self.current_image == reaper_l_1 or self.current_image == reaper_l_2:
                 self.current_image = reaper_l_1f
 
@@ -128,8 +101,7 @@ class start():
             else:
                 self.current_image = reaper_l_2f
             self.speed = 0
-
-
+            
         pos += self.speed
 
         # size of ghost
@@ -139,8 +111,6 @@ class start():
 
         ## main loop ##
         self.anim = root.after(100, lambda: start.animation(count, pos,flip))
-
-    
 
 label = tk.Label(root, bd=0, bg='#0400FF')
 
